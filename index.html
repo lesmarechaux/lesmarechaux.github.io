@@ -13,17 +13,27 @@
 				#conseilpanel {
 					position:absolute;
 					width:672px;
-					height:100px;
+					height:164px;
 					bottom:0px;
 					right:25%;
 					left:50%;
 					margin-left:-336px;
 				}
-				#conseilimage {
+				#mappanel {
+					position:absolute;
+					width:368px;
+					height:130px;
+					bottom:170px;
+					right:25%;
+					left:50%;
+					margin-left:-168px;
+				}
+				.ui {
 					width: 100%;
 					height: 100%;
 				}
 				#conseil {
+					text-align: center;
 					position: absolute;
 					width: 500px;
 					top: 20%;
@@ -32,12 +42,27 @@
 					font-family: 'Bohemian Typewriter';
 					src: url("res/fonts/Bohemian Typewriter.ttf") format('truetype');
 				}
+				#mapname {
+					text-align: center;
+					position: absolute;
+					width: 500px;
+					top: 30%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					font-family: 'Bohemian Typewriter';
+					font-size: larger;
+					src: url("res/fonts/Bohemian Typewriter.ttf") format('truetype');
+				}
 			</style>
 		</head>
 	<body>
 		<div id="conseilpanel">
-			<img src="https://cdn.discordapp.com/attachments/332446128895426572/928017863275601961/backpanel.png" alt="encadrement" id="conseilimage">
+			<img src="https://cdn.discordapp.com/attachments/332446128895426572/928366090764034088/backpanel02.png" alt="encadrement" class="ui">
 			<p  id="conseil">Tirez sur l'ennemi!</p>
+		</div>
+		<div id="mappanel">
+			<img src="https://cdn.discordapp.com/attachments/332446128895426572/928367419255296040/mapdetails.png" alt="map" class="ui">
+			<p  id="mapname">Champ de bataille actuel</p>
 		</div>
 		<script>
 			const conseils = [
@@ -68,7 +93,12 @@
 				"La haine peut vous emmener très loin dans les rangs d'une armée fanatisée !",
 				"L'armée compte sur vous, et pas l'inverse."
 			];
-			const delai = 5;
+			const titremap = [
+				["fmgf_falaise_v2_d", "Falaise"]
+			]
+			const delai = 10;
+
+			var mapName = document.getElementById("mapname");
 			
 			setInterval(switchConseil, delai*1000)
 			function switchConseil()
@@ -81,6 +111,10 @@
 				} else {
 					conseil.innerHTML = conseils[id];
 				}
+			}
+
+			function GameDetails( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
+				mapName.innerHTML = servername
 			}
 		</script>
 	</body>
