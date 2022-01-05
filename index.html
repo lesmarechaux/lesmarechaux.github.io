@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 	<html>
 		<head>
-		<title>Background-Image Test</title>
+		<title>Ecran de chargement</title>
 			<style>
 				body {
-				background-image: url("https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png");            
-				background-size: 100%;
-				background-origin: content;
-				background-repeat: no-repeat;
+					background-image: url("https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png");            
+					background-size: 100%;
+					background-origin: content;
+					background-repeat: no-repeat;
+					overflow: hidden;
+				}
+				#conseilpanel {
+					position:absolute;
+					width:672px;
+					height:100px;
+					bottom:0px;
+					right:25%;
+					left:50%;
+					margin-left:-336px;
+				}
+				#conseilimage {
+					width: 100%;
+					height: 100%;
+				}
+				#conseil {
+					position: absolute;
+					top: 20%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					font-family: 'Bohemian Typewriter';
+					src: url("res/fonts/Bohemian Typewriter.ttf") format('truetype');
 				}
 			</style>
 		</head>
 	<body>
+		<div id="conseilpanel">
+			<img src="https://cdn.discordapp.com/attachments/332446128895426572/928017863275601961/backpanel.png" alt="encadrement" id="conseilimage">
+			<p  id="conseil">Tirez sur l'ennemi!</p>
+		</div>
 	</body>
 </html>
