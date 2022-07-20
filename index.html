@@ -12,7 +12,6 @@
 					src: url("res/fonts/Bohemian Typewriter.ttf") format('truetype');
 				}
 				body {
-					background-image: url("https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png");            
 					background-size: 100%;
 					background-origin: content;
 					background-repeat: no-repeat;
@@ -21,11 +20,14 @@
 				#cadreserveur {
 					position:absolute;
 					width:624px;
-					height:204px;
-					top:10px;
+					height:310px;
+					top:-75px;
 					right:25%;
 					left:50%;
 					margin-left:-312px;
+				}
+				#cadreserveur img {
+					filter: drop-shadow(0 0 35px, crimson);
 				}
 				#conseilpanel {
 					position:absolute;
@@ -88,8 +90,9 @@
 		</head>
 	<body>
 		<div id="cadreserveur">
-			<img src="https://cdn.discordapp.com/attachments/332446128895426572/928389973919563776/Faceplates_faceplate_frame_aa_gold.png" alt="cadre" class="ui">
-			<p  id="nomserveur">Les Maréchaux</p>
+			<!-- <img src="https://cdn.discordapp.com/attachments/332446128895426572/928389973919563776/Faceplates_faceplate_frame_aa_gold.png" alt="cadre" class="ui"> -->
+			<img src="https://cdn.discordapp.com/attachments/988825338073214976/988825493690269736/logo_military_rp_02.png" alt="cadre" class="ui">
+			<!-- <p  id="nomserveur">Les Maréchaux</p> -->
 		</div>
 		<div id="conseilpanel">
 			<img src="https://cdn.discordapp.com/attachments/332446128895426572/928366090764034088/backpanel02.png" alt="encadrement" class="ui">
@@ -131,6 +134,13 @@
 			const titremap = [
 				["fmgf_falaise_v2_d", "Falaise"]
 			]
+			const backgrounds = [
+				"https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png",
+				"https://cdn.discordapp.com/attachments/986972239205392435/998615830143172688/20220718163340_1.jpg",
+				"https://cdn.discordapp.com/attachments/986972239205392435/998615832819138560/20220718163457_1.jpg",
+				"https://cdn.discordapp.com/attachments/986972239205392435/998624335520604160/20220718181540_1.jpg",
+				"https://cdn.discordapp.com/attachments/986972239205392435/998624335805829241/20220718175026_1.jpg"
+			]
 			const delai = 10;
 
 			var mapName = document.getElementById("mapname");
@@ -145,6 +155,19 @@
 					conseil.innerHTML = conseils[id];
 				} else {
 					conseil.innerHTML = conseils[id];
+				}
+			}
+
+			switchBackground()
+			setInterval(switchBackground, delai*2000)
+			function switchBackground()
+			{
+				var id = Math.floor(Math.random() * backgrounds.length)
+				if (backgrounds[id] == backgrounds.innerHTML) {
+					if (id <= backgrounds.length) {id--;} else {id++;}
+					document.body.style.backgroundImage = 'url(' + backgrounds[id] + ')';
+				} else {
+					document.body.style.backgroundImage = 'url(' + backgrounds[id] + ')';
 				}
 			}
 
