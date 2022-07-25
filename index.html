@@ -189,7 +189,7 @@
 			setInterval(switchBackground, delai*2000)
 			function switchBackground()
 			{
-				var id = Math.floor(Math.random() * backgrounds.length)
+				var id = Math.floor(Math.random() * backgrounds[mapName].length)
 				if (backgrounds[mapName][id] == document.body.style.backgroundImage) {
 					if (id <= backgrounds[mapName].length) {id--;} else {id++;}
 					document.body.style.backgroundImage = 'url(' + backgrounds[mapName][id] + ')';
