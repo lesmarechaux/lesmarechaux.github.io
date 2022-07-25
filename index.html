@@ -137,17 +137,17 @@
 				["lmx_ardennes", "Trifiniac-les-choux, Ardennes"],
 				["lmx_sudfrforma", "Centre de formation, Moissac"]
 			]
-			const backgrounds = [
-				["fmgf_falaise_v2_d", [
+			const backgrounds = {
+				"fmgf_falaise_v2_d": [
 					"https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png"
-				]],
-				["lmx_ardennes", [
+				],
+				"lmx_ardennes": [
 					"https://cdn.discordapp.com/attachments/986972239205392435/998615830143172688/20220718163340_1.jpg",
 					"https://cdn.discordapp.com/attachments/986972239205392435/998615832819138560/20220718163457_1.jpg",
 					"https://cdn.discordapp.com/attachments/986972239205392435/998624335520604160/20220718181540_1.jpg",
 					"https://cdn.discordapp.com/attachments/986972239205392435/998624335805829241/20220718175026_1.jpg"
-				]],
-				["lmx_sudfrforma", [
+				],
+				"lmx_sudfrforma": [
 					"https://cdn.discordapp.com/attachments/986972239205392435/1001153824783876167/20220725165204_1.jpg",
 					"https://cdn.discordapp.com/attachments/986972239205392435/1001153824129552464/20220725165036_1.jpg",
 					"https://cdn.discordapp.com/attachments/986972239205392435/1001153823794016418/20220725165019_1.jpg",
@@ -166,11 +166,21 @@
 					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052060618792/20220725174511_1.jpg",
 					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052345835560/20220725174542_1.jpg",
 					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052920451082/20220725174122_1.jpg"
-				]]
-			]
+				]
+			}
 			const delai = 10;
 
 			var mapName = document.getElementById("mapname");
+			var realMapName = "fmgf_falaise_v2_d";
+
+			function GameDetails( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
+				titremap.forEach(trans => {
+					if (trans[0] == mapname) {
+						mapName.innerHTML = trans[1]
+						realMapName = mapname
+					}
+				});
+			}
 			
 			setInterval(switchConseil, delai*1000)
 			function switchConseil()
@@ -185,6 +195,9 @@
 				}
 			}
 
+			console.log(realMapName)
+			switchBackground(realMapName)
+			setInterval(switchBackground, delai*2000, realMapName)
 			function switchBackground(mapname)
 			{
 				var id = Math.floor(Math.random() * backgrounds[mapname].length)
@@ -194,16 +207,6 @@
 				} else {
 					document.body.style.backgroundImage = 'url(' + backgrounds[mapname][id] + ')';
 				}
-			}
-
-			function GameDetails( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
-				titremap.forEach(trans => {
-					if (trans[0] == mapname) {
-						mapName.innerHTML = trans[1]
-						switchBackground(mapname)
-						setInterval(switchBackground, delai*2000, mapname)
-					}
-				});
 			}
 		</script>
 	</body>
