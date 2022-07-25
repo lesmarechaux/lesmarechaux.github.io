@@ -200,8 +200,8 @@
 				titremap.forEach(trans => {
 					if (trans[0] == mapname) {
 						mapName.innerHTML = trans[1]
-						switchBackground()
-						setInterval(switchBackground, delai*2000)
+						switchBackground(mapname)
+						setInterval(switchBackground, delai*2000, mapname)
 					}
 				});
 			}
