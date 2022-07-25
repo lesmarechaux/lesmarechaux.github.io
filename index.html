@@ -103,6 +103,7 @@
 			<img src="https://cdn.discordapp.com/attachments/332446128895426572/928387411359187004/missiondetails.png" alt="map" class="ui">
 			<p  id="mapname">Champ de bataille actuel</p>
 		</div>
+		<div id="music-player"></div>
 		<script>
 			const conseils = [
 				"N'oubliez pas de faire le plein de carburant !",
@@ -208,6 +209,11 @@
 					document.body.style.backgroundImage = 'url(' + backgrounds[mapname][id] + ')';
 				}
 			}
+		</script>
+		<script>
+			var audio = new Audio("res/music/moh_end_credits.mp3");
+			audio.volume = 0.15;
+			audio.play();
 		</script>
 	</body>
 </html>
