@@ -137,11 +137,15 @@
 				["lmx_ardennes", "Trifiniac-les-choux, Ardennes"]
 			]
 			const backgrounds = [
-				"https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png",
-				"https://cdn.discordapp.com/attachments/986972239205392435/998615830143172688/20220718163340_1.jpg",
-				"https://cdn.discordapp.com/attachments/986972239205392435/998615832819138560/20220718163457_1.jpg",
-				"https://cdn.discordapp.com/attachments/986972239205392435/998624335520604160/20220718181540_1.jpg",
-				"https://cdn.discordapp.com/attachments/986972239205392435/998624335805829241/20220718175026_1.jpg"
+				["fmgf_falaise_v2_d", [
+					"https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png"
+				]],
+				["lmx_ardennes", [
+					"https://cdn.discordapp.com/attachments/986972239205392435/998615830143172688/20220718163340_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/998615832819138560/20220718163457_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/998624335520604160/20220718181540_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/998624335805829241/20220718175026_1.jpg"
+				]]
 			]
 			const delai = 10;
 
@@ -165,11 +169,11 @@
 			function switchBackground()
 			{
 				var id = Math.floor(Math.random() * backgrounds.length)
-				if (backgrounds[id] == backgrounds.innerHTML) {
-					if (id <= backgrounds.length) {id--;} else {id++;}
-					document.body.style.backgroundImage = 'url(' + backgrounds[id] + ')';
+				if (backgrounds[mapName][id] == document.body.style.backgroundImage) {
+					if (id <= backgrounds[mapName].length) {id--;} else {id++;}
+					document.body.style.backgroundImage = 'url(' + backgrounds[mapName][id] + ')';
 				} else {
-					document.body.style.backgroundImage = 'url(' + backgrounds[id] + ')';
+					document.body.style.backgroundImage = 'url(' + backgrounds[mapName][id] + ')';
 				}
 			}
 
