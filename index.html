@@ -185,16 +185,14 @@
 				}
 			}
 
-			switchBackground()
-			setInterval(switchBackground, delai*2000)
-			function switchBackground()
+			function switchBackground(mapname)
 			{
-				var id = Math.floor(Math.random() * backgrounds[mapName].length)
-				if (backgrounds[mapName][id] == document.body.style.backgroundImage) {
-					if (id <= backgrounds[mapName].length) {id--;} else {id++;}
-					document.body.style.backgroundImage = 'url(' + backgrounds[mapName][id] + ')';
+				var id = Math.floor(Math.random() * backgrounds[mapname].length)
+				if (backgrounds[mapname][id] == document.body.style.backgroundImage) {
+					if (id <= backgrounds[mapname].length) {id--;} else {id++;}
+					document.body.style.backgroundImage = 'url(' + backgrounds[mapname][id] + ')';
 				} else {
-					document.body.style.backgroundImage = 'url(' + backgrounds[mapName][id] + ')';
+					document.body.style.backgroundImage = 'url(' + backgrounds[mapname][id] + ')';
 				}
 			}
 
@@ -202,6 +200,8 @@
 				titremap.forEach(trans => {
 					if (trans[0] == mapname) {
 						mapName.innerHTML = trans[1]
+						switchBackground()
+						setInterval(switchBackground, delai*2000)
 					}
 				});
 			}
