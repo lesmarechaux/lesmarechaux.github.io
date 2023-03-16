@@ -133,11 +133,11 @@
 				"La haine peut vous emmener très loin dans les rangs d'une armée fanatisée !",
 				"L'armée compte sur vous, et pas l'inverse."
 			];
-			const titremap = [
-				["fmgf_falaise_v2_d", "Alentours de Falaise, Normandie"],
-				["lmx_ardennes", "Trifiniac-les-choux, Ardennes"],
-				["lmx_sudfrforma", "Centre de formation, Moissac"]
-			]
+			const titremap = {
+				'fmgf_falaise_v2_d': "Alentours de Falaise, Normandie",
+				'lmx_ardennes': "Trifiniac-les-choux, Ardennes",
+				'lmx_sudfrforma': "Centre de formation, Moissac"
+			}
 			const backgrounds = {
 				"fmgf_falaise_v2_d": [
 					"https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png"
@@ -172,42 +172,33 @@
 			const delai = 10;
 
 			var mapName = document.getElementById("mapname");
-			var realMapName = "fmgf_falaise_v2_d";
+			var conseil = document.getElementById("conseil");
+			var realMapName = "lmx_sudfrforma";
 
-			function GameDetails( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
-				titremap.forEach(trans => {
-					if (trans[0] == mapname) {
-						mapName.innerHTML = trans[1]
-						realMapName = mapname
-					}
-				});
-			}
+			mapName.innerHTML = titremap[realMapName];
 			
-			setInterval(switchConseil, delai*1000)
+			switchConseil();
+			setInterval(switchConseil, delai*1000);
 			function switchConseil()
 			{
-				var conseil = document.getElementById("conseil");
 				var id = Math.floor(Math.random() * conseils.length)
-				if (conseils[id] == conseil.innerHTML) {
-					if (id <= conseils.length) {id--;} else {id++;}
-					conseil.innerHTML = conseils[id];
-				} else {
-					conseil.innerHTML = conseils[id];
-				}
+				conseil.innerHTML = conseils[id];
 			}
 
-			console.log(realMapName)
-			switchBackground(realMapName)
-			setInterval(switchBackground, delai*2000, realMapName)
-			function switchBackground(mapname)
+			var backgroundList = backgrounds[realMapName];
+			switchBackground();
+			setInterval(switchBackground, delai*1000);
+			function switchBackground()
 			{
-				var id = Math.floor(Math.random() * backgrounds[mapname].length)
-				if (backgrounds[mapname][id] == document.body.style.backgroundImage) {
-					if (id <= backgrounds[mapname].length) {id--;} else {id++;}
-					document.body.style.backgroundImage = 'url(' + backgrounds[mapname][id] + ')';
-				} else {
-					document.body.style.backgroundImage = 'url(' + backgrounds[mapname][id] + ')';
-				}
+				var id = Math.floor(Math.random() * backgroundList.length);
+				document.body.style.backgroundImage = 'url(' + backgroundList[id] + ')';
+			}
+
+			function GameDetails( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
+				realMapName = mapname;
+				backgroundList = backgrounds[realMapName];
+				switchConseil();
+				switchBackground();
 			}
 		</script>
 		<script>
