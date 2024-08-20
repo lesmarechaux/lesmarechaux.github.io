@@ -1,2 +1,3 @@
-# Ecran de chargement pour le serveur MilitaryRP Les Maréchaux.
-Concu et codé par Gordon Beeman
+# Pages github dédiées aux serveurs Les Maréchaux
+
+[Ecran de chargement WW2](https://pages.github.com/)
