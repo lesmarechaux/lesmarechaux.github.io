@@ -1,3 +1,4 @@
 # Pages github dédiées aux serveurs Les Maréchaux
 
-[Ecran de chargement WW2](https://pages.github.com/)
+[Ancien écran de chargement WW2](https://lesmarechaux.github.io/pages/loading-ww2-old.html)
+[Nouvel écran de chargement WW2](https://lesmarechaux.github.io/pages/loading-ww2-new.html)
