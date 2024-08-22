@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+		<title>Ecran de chargement</title>
+			<style>
+				@font-face {
+					font-family: "My World";
+					src: url("res/fonts/My_World.ttf") format('truetype');
+				}
+				@font-face {
+					font-family: "Bohemian Typewriter";
+					src: url("res/fonts/Bohemian Typewriter.ttf") format('truetype');
+				}
+				body {
+					background-size: 100%;
+					background-origin: content;
+					background-repeat: no-repeat;
+					overflow: hidden;
+				}
+				#cadreserveur {
+					position:absolute;
+					width:624px;
+					height:310px;
+					top:-75px;
+					right:25%;
+					left:50%;
+					margin-left:-312px;
+				}
+				#cadreserveur img {
+  					-webkit-filter: drop-shadow(0px 0px 3px #000);
+  					filter: drop-shadow(0px 0px 3px #000);
+				}
+				#conseilpanel {
+					position:absolute;
+					width:672px;
+					height:164px;
+					bottom:0px;
+					right:25%;
+					left:50%;
+					margin-left:-336px;
+				}
+				#mappanel {
+					position:absolute;
+					width:448px;
+					height:68px;
+					bottom:145px;
+					right:25%;
+					left:50%;
+					margin-left:-224px;
+				}
+				.ui {
+					width: 100%;
+					height: 100%;
+				}
+				#nomserveur {
+					text-align: center;
+					text-shadow: 1px 1px 2px brown, 0 0 1em black, 0 0 0.2em green;
+					color: azure;
+					position: absolute;
+					width: 700px;
+					top: 0%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					font-family: 'My World';
+					font-size: 100px;
+					font-weight: 500;
+					src: url("res/fonts/My_World.ttf") format('truetype');
+				}
+				#conseil {
+					text-align: center;
+					position: absolute;
+					width: 500px;
+					top: 20%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					font-family: 'Bohemian Typewriter';
+					src: url("res/fonts/Bohemian Typewriter.ttf") format('truetype');
+				}
+				#mapname {
+					text-align: center;
+					position: absolute;
+					width: 500px;
+					top: 20%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					font-family: 'Bohemian Typewriter';
+					font-size: larger;
+					src: url("res/fonts/Bohemian Typewriter.ttf") format('truetype');
+				}
+			</style>
+		</head>
+	<body>
+		<div id="cadreserveur">
+			<!-- <img src="https://cdn.discordapp.com/attachments/332446128895426572/928389973919563776/Faceplates_faceplate_frame_aa_gold.png" alt="cadre" class="ui"> -->
+			<img src="https://github.com/lesmarechaux/lesmarechaux.github.io/blob/main/res/img/Faceplates_faceplate_frame_aa_gold.png?raw=true" alt="cadre" class="ui">
+			<!-- <p  id="nomserveur">Les Maréchaux</p> -->
+		</div>
+		<div id="conseilpanel">
+			<img src="https://github.com/lesmarechaux/lesmarechaux.github.io/blob/main/res/img/backpanel02.png?raw=true" alt="encadrement" class="ui">
+			<p  id="conseil">Tirez sur l'ennemi!</p>
+		</div>
+		<div id="mappanel">
+			<img src="https://github.com/lesmarechaux/lesmarechaux.github.io/blob/main/res/img/backpanel.png?raw=true" alt="map" class="ui">
+			<p  id="mapname">Champ de bataille actuel</p>
+		</div>
+		<div id="music-player"></div>
+		<script>
+			const conseils = [
+				"N'oubliez pas de faire le plein de carburant !",
+				"Conduire nécessite une formation !",
+				"Faites attention au tireurs d'élite soviétiques, ils sont sans pitié et ne vous laisseront pas les repérer!",
+				"Les blindés constituent un soutien à l'infanterie, protégez les et ils vous protégeront !",
+				"Un char demande un équipage complet pour fonctionner de manière efficace.",
+				"Restez à couvert lors d'un échange de tirs, le génie laisse des sacs de sables, ceux-ci ne servent pas de décorations !",
+				"Il ne faut pas un tank pour détruire un tank, les canons anti-char et les fusils sans-recul peuvent faire l'affaire.",
+				"Tirer debout ne présente que des défauts, manque de stabilité, de précision et de couverture !",
+				"Votre vie dépend dépend de vos actions, de votre discipline et de votre couverture!",
+				"Pensez à tirer le bon obus selon votre cible, Hautement Explosif pour l'infanterie, Perce-Armure pour les blindés.",
+				"La ruse est importante au combat, elle peut vous sauver la mise !",
+				"Vous n'êtes pas né ranger, jager ou troupe de choc... Votre fusil ne vous permet pas la capture d'un avant-poste à vous tout seul.",
+				"Les promotions se méritent, elles ne se comptent pas à la montre, certains mènent une 'carrière' de caporal.",
+				"Attaqué par une de ces saloperies de Stuka ? Utilisez le matériel antiaérien ou demandez à votre supérieur de faire son boulot.",
+				"Vous rêvez de survoler les champs de bataille et de faire des massacres ? Engagez-vous dans l'armée de l'air !",
+				"La patience est importante ! Elle joue beaucoup sur le moral des troupes !",
+				"La composante principale d'une armée est la discipline!",
+				"Votre arme est tout pour vous, ne la perdez jamais et entretenez-là !",
+				"Si vous êtes officier, savoir tirer et connaître son arme par cœur ne sera plus si important, le plus important est la stratégie utilisée sur le front !",
+				"Si vous voyez Ernest, fuyez !",
+				"Une guerre ne doit jamais être équilibrée et c'est a vous de la déséquilibrer à votre avantage.",
+				"Ernest Mann est un sous-officier assez spécial, vous êtes prévenu !",
+				"Être tireur d'élite n'est pas une simple tâche, cela dépend de pour qui vous vous battez.",
+				"Si vous êtes seul armé d’une pelle face à un char, courez, courez vite et très loin.",
+				"La haine peut vous emmener très loin dans les rangs d'une armée fanatisée !",
+				"L'armée compte sur vous, et pas l'inverse."
+			];
+			const titremap = {
+				'fmgf_falaise_v2_d': "Alentours de Falaise, Normandie, France",
+				'lmx_ardennes': "Trifiniac-les-choux, Ardennes, France",
+				'lmx_sud': "Alentours de Maratea, Potenza, Italie",
+				'lmx_sudfrforma': "Centre de formation, Moissac, France",
+				'lmx_falaise_v2g': "Alentours de Falaise, Normandie, France",
+			}
+			const backgrounds = {
+				"fmgf_falaise_v2_d": [
+					"https://cdn.discordapp.com/attachments/693932585360949331/817766727927726090/1.png"
+				],
+				"lmx_ardennes": [
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086379645378773103/20220718163414_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086379646041473094/20220718163240_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086379646356049970/20220718163322_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086379646649630853/20220718163335_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086379646918082661/20220718163358_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086379763360333914/20220718163719_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086379805877993602/20220718175026_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086379763888824481/20220718163744_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086380203200217128/20221005191620_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086380203602878494/20221005191702_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086380204668231801/20221005191908_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086380205444177920/20221005191508_1.jpg",
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086380205771329716/20221005191550_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/998615830143172688/20220718163340_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/998615832819138560/20220718163457_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/998624335520604160/20220718181540_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/998624335805829241/20220718175026_1.jpg"
+				],
+				"lmx_sud": [
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086380369198186616/20230211230457_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153824783876167/20220725165204_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153824129552464/20220725165036_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153823794016418/20220725165019_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153823496212610/20220725165007_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153825127813271/20220725165213_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153825698226176/20220725164408_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153963942494228/20220725165905_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153964202532924/20220725171617_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153964932333688/20220725171647_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153964487757934/20220725171628_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153965179805807/20220725171701_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154020439769108/20220725172019_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154021106667650/20220725172421_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154021995851836/20220725173741_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154051695710288/20220725174443_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052060618792/20220725174511_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052345835560/20220725174542_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052920451082/20220725174122_1.jpg"
+				],
+				"lmx_sudfrforma": [
+					"https://cdn.discordapp.com/attachments/1086377446942712008/1086380369198186616/20230211230457_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153824783876167/20220725165204_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153824129552464/20220725165036_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153823794016418/20220725165019_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153823496212610/20220725165007_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153825127813271/20220725165213_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153825698226176/20220725164408_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153963942494228/20220725165905_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153964202532924/20220725171617_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153964932333688/20220725171647_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153964487757934/20220725171628_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001153965179805807/20220725171701_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154020439769108/20220725172019_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154021106667650/20220725172421_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154021995851836/20220725173741_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154051695710288/20220725174443_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052060618792/20220725174511_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052345835560/20220725174542_1.jpg",
+					"https://cdn.discordapp.com/attachments/986972239205392435/1001154052920451082/20220725174122_1.jpg"
+				]
+			}
+			const delai = 10;
+
+			var mapName = document.getElementById("mapname");
+			var conseil = document.getElementById("conseil");
+			var realMapName = "lmx_sud";
+
+			mapName.innerHTML = titremap[realMapName];
+			
+			switchConseil();
+			setInterval(switchConseil, delai*1000);
+			function switchConseil()
+			{
+				var id = Math.floor(Math.random() * conseils.length)
+				conseil.innerHTML = conseils[id];
+			}
+
+			var backgroundList = backgrounds[realMapName];
+			switchBackground();
+			setInterval(switchBackground, delai*1000);
+			function switchBackground()
+			{
+				var id = Math.floor(Math.random() * backgroundList.length);
+				document.body.style.backgroundImage = 'url(' + backgroundList[id] + ')';
+			}
+
+			function GameDetails( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
+				realMapName = mapname;
+				backgroundList = backgrounds[realMapName];
+				switchConseil();
+				switchBackground();
+			}
+		</script>
+		<script>
+			var audio = new Audio("res/music/7e_compagnie.mp3");
+			audio.volume = 0.01;
+			audio.play();
+		</script>
+	</body>
+</html>
