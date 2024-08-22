@@ -128,6 +128,6 @@ function SetStatusChanged( status ) {}
 
 function SetFilesNeeded( needed ) {}
 
-setTimeout( () => {
-    GameDetails( "Les Maréchaux", "liqjdzdqzd", "lmx_falaise_v2g", 32, "STEAMIDIDID", "lmx_military", 0.5, "fr" );
-}, 1000 );
+// setTimeout( () => {
+//     GameDetails( "Les Maréchaux", "liqjdzdqzd", "lmx_falaise_v2g", 32, "STEAMIDIDID", "lmx_military", 0.5, "fr" );
+// }, 1000 );
